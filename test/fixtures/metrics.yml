@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  pollgroup_id: 1
+  metric_type_id: 1
+  data_type_id: 1
+  port: 1
+  property: MyString
+
+two:
+  name: MyString
+  pollgroup_id: 1
+  metric_type_id: 1
+  data_type_id: 1
+  port: 1
+  property: MyString

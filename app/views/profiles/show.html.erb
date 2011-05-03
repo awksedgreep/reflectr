@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Device type:</b>
+  <%= @profile.device_type_id %>
+</p>
+
+<p>
+  <b>Pollgroup:</b>
+  <%= @profile.pollgroup_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_profile_path(@profile) %> |
+<%= link_to 'Back', profiles_path %>

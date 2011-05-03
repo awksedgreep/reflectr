@@ -1,0 +1,23 @@
+<h1>Listing pollgroups</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @pollgroups.each do |pollgroup| %>
+  <tr>
+    <td><%= pollgroup.name %></td>
+    <td><%= link_to 'Show', pollgroup %></td>
+    <td><%= link_to 'Edit', edit_pollgroup_path(pollgroup) %></td>
+    <td><%= link_to 'Destroy', pollgroup, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Pollgroup', new_pollgroup_path %>

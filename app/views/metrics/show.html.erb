@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @metric.name %>
+</p>
+
+<p>
+  <b>Pollgroup:</b>
+  <%= @metric.pollgroup_id %>
+</p>
+
+<p>
+  <b>Metric type:</b>
+  <%= @metric.metric_type_id %>
+</p>
+
+<p>
+  <b>Data type:</b>
+  <%= @metric.data_type_id %>
+</p>
+
+<p>
+  <b>Port:</b>
+  <%= @metric.port %>
+</p>
+
+<p>
+  <b>Property:</b>
+  <%= @metric.property %>
+</p>
+
+
+<%= link_to 'Edit', edit_metric_path(@metric) %> |
+<%= link_to 'Back', metrics_path %>

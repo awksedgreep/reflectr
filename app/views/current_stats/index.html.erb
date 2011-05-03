@@ -1,0 +1,29 @@
+<h1>Listing current_stats</h1>
+
+<table>
+  <tr>
+    <th>Metric</th>
+    <th>Device</th>
+    <th>String value</th>
+    <th>Value</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @current_stats.each do |current_stat| %>
+  <tr>
+    <td><%= current_stat.metric_id %></td>
+    <td><%= current_stat.device_id %></td>
+    <td><%= current_stat.string_value %></td>
+    <td><%= current_stat.value %></td>
+    <td><%= link_to 'Show', current_stat %></td>
+    <td><%= link_to 'Edit', edit_current_stat_path(current_stat) %></td>
+    <td><%= link_to 'Destroy', current_stat, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Current stat', new_current_stat_path %>

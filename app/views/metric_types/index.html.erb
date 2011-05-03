@@ -1,0 +1,23 @@
+<h1>Listing metric_types</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @metric_types.each do |metric_type| %>
+  <tr>
+    <td><%= metric_type.name %></td>
+    <td><%= link_to 'Show', metric_type %></td>
+    <td><%= link_to 'Edit', edit_metric_type_path(metric_type) %></td>
+    <td><%= link_to 'Destroy', metric_type, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Metric type', new_metric_type_path %>

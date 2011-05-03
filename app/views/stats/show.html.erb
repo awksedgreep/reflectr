@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Metric:</b>
+  <%= @stat.metric_id %>
+</p>
+
+<p>
+  <b>Device:</b>
+  <%= @stat.device_id %>
+</p>
+
+<p>
+  <b>String value:</b>
+  <%= @stat.string_value %>
+</p>
+
+<p>
+  <b>Value:</b>
+  <%= @stat.value %>
+</p>
+
+
+<%= link_to 'Edit', edit_stat_path(@stat) %> |
+<%= link_to 'Back', stats_path %>

@@ -1,0 +1,2 @@
+module CurrentStatsHelper
+end
