@@ -1,3 +1,10 @@
 == Welcome to Reflectr
 
 This is a database monitoring application that runs on top of torquebox.
+
+== Todo
+Implement JMX using the following:
+
+  c = JMX.connect(:port => 1090)
+  uri = 'org.hornetq:address="jms.queue./queues/msgq",module=Core,name="jms.queue./queues/msgq",type=Queue'
+  c[uri].send("MessagesAdded".underscore)

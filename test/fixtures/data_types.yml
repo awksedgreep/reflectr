@@ -1,7 +1,16 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  name: MyString
+counter:
+  name: Counter
 
-two:
-  name: MyString
+
+gauge:
+  name: Gauge
+
+
+timeticks:
+  name: Timeticks
+
+
+text:
+  name: Text

@@ -1,13 +1,13 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  name: MyString
-  ip: MyString
-  url: MyString
-  device_type_id: 1
+reflectrdb:
+  name: Reflectr DB
+  ip: 127.0.0.1
+  url: jdbc:postgresql://127.0.0.1/reflectr?user=reflectr&password=r3fl3ctr
+  device_type: pg
 
-two:
-  name: MyString
-  ip: MyString
-  url: MyString
+reflectrhornetq:
+  name: Reflectr Hornet Qs
+  ip: 127.0.0.1
+  url: module=Core,name=*,type=Queue
   device_type_id: 1
