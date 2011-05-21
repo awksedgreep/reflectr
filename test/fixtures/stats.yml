@@ -1,13 +1,2 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  metric_id: 1
-  device_id: 1
-  string_value: MyString
-  value: 
-
-two:
-  metric_id: 1
-  device_id: 1
-  string_value: MyString
-  value: 

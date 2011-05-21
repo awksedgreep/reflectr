@@ -1,7 +1,17 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  name: MyString
+jmx:
+  name: JMX
 
-two:
-  name: MyString
+
+snmp:
+  name: SNMP
+
+
+mysqlshow:
+  name: MySQL Show Status
+
+
+query:
+  name: Query
+

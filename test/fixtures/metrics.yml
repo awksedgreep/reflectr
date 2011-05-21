@@ -1,17 +1,21 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  name: MyString
-  pollgroup_id: 1
-  metric_type_id: 1
-  data_type_id: 1
-  port: 1
-  property: MyString
+# Metric.create(:name => 'Messages Added', :port => 1090, :pollgroup => hornetq, :metric_type => metric_jmx, :data_type => counter, :property => 'MessagesAdded')
+# Metric.create(:name => 'Message Count', :port => 1090, :pollgroup => hornetq, :metric_type => metric_jmx, :data_type => gauge, :property => 'MessageCount')
 
-two:
-  name: MyString
-  pollgroup_id: 1
-  metric_type_id: 1
-  data_type_id: 1
-  port: 1
-  property: MyString
+
+messagesadded:
+  name: Messages Added
+  pollgroup: hornetq
+  metric_type: jmx
+  data_type: counter
+  port: 1090
+  property: MessagesAdded
+
+messagecount:
+  name: Message Count
+  pollgroup: hornetq
+  metric_type: jmx
+  data_type: gauge
+  port: 1090
+  property: MessageCount

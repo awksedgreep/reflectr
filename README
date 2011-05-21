@@ -6,5 +6,9 @@ This is a database monitoring application that runs on top of torquebox.
 Implement JMX using the following:
 
   c = JMX.connect(:port => 1090)
-  uri = 'org.hornetq:address="jms.queue./queues/msgq",module=Core,name="jms.queue./queues/msgq",type=Queue'
-  c[uri].send("MessagesAdded".underscore)
+  c.query_names('org.hornetq:module=Core,type=Queue,name="jms.queue.DLQ",address="jms.queue.DLQ"').each do |value|
+    puts value.to_s
+    puts c[value].send('MessagesAdded'.underscore)
+  end
+org.hornetq:module=Core,type=Queue,address="jms.queue.DLQ",name="jms.queue.DLQ"
+44

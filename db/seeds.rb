@@ -6,42 +6,49 @@
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first}
 MetricType.delete_all
-MetricType.create(:name => 'JMX')
-MetricType.create(:name => 'SNMP')
-MetricType.create(:name => 'MySQL Show Status')
-MetricType.create(:name => 'Query')
+metric_jmx =   MetricType.create(:name => 'JMX')
+metric_snmp =  MetricType.create(:name => 'SNMP')
+metric_show =  MetricType.create(:name => 'MySQL Show Status')
+metric_query = MetricType.create(:name => 'Query')
 
 DeviceType.delete_all
 DeviceType.create(:name => 'ActiveMQ Server')
-hornetq =  DeviceType.create(:name => 'HornetQ Server')
+dt_hornetq =  DeviceType.create(:name => 'HornetQ Server')
 DeviceType.create(:name => 'MySQL Server')
 DeviceType.create(:name => 'SQL Server')
-pgserver = DeviceType.create(:name => 'PostgreSQL Server')
+pgserver =    DeviceType.create(:name => 'PostgreSQL Server')
 
 Pollgroup.delete_all
-Pollgroup.create(:name => 'ActiveMQ JMX Metrics')
-Pollgroup.create(:name => 'HornetQ JMX Metrics')
-Pollgroup.create(:name => 'MySQL Show Status Metrics')
-pgdb =    Pollgroup.create(:name => 'PostgreSQL Database Statistics')
-pgtable = Pollgroup.create(:name => 'PostgreSQL Table Statistics')
-pgindex = Pollgroup.create(:name => 'PostgreSQL Index Statistics')
+activemq =  Pollgroup.create(:name => 'ActiveMQ JMX Metrics')
+hornetq =   Pollgroup.create(:name => 'HornetQ JMX Metrics')
+mysqlshow = Pollgroup.create(:name => 'MySQL Show Status Metrics')
+pgdb =      Pollgroup.create(:name => 'PostgreSQL Database Statistics')
+pgtable =   Pollgroup.create(:name => 'PostgreSQL Table Statistics')
+pgindex =   Pollgroup.create(:name => 'PostgreSQL Index Statistics')
 
-Profile.create(:device_type => pgserver, :pollgroup => pgdb)
-Profile.create(:device_type => pgserver, :pollgroup => pgtable)
-Profile.create(:device_type => pgserver, :pollgroup => pgindex)
+Profile.delete_all
+profile_hornetq = Profile.create(:device_type => dt_hornetq, :pollgroup => hornetq)
+profile_pgdb =    Profile.create(:device_type => pgserver, :pollgroup => pgdb)
+profile_pgtable = Profile.create(:device_type => pgserver, :pollgroup => pgtable)
+profile_pgindex = Profile.create(:device_type => pgserver, :pollgroup => pgindex)
 
 DataType.delete_all
-DataType.create([{:name => 'Counter'}, {:name => 'Gauge'}, {:name => 'Timeticks'}, {:name => 'Text'}])
+counter =   DataType.create(:name => 'Counter')
+gauge =     DataType.create(:name => 'Gauge')
+timeticks = DataType.create(:name => 'Timeticks')
+text =      DataType.create(:name => 'Text')
 
 Device.delete_all
-Device.create(:name => 'Reflectr DB', :ip => '127.0.0.1', 
-              :url => 'jdbc:postgresql://127.0.0.1/reflectr?user=testuser&password=testme', 
+reflectr_db = Device.create(:name => 'Reflectr DB', :ip => '127.0.0.1', 
+              :url => 'jdbc:postgresql://127.0.0.1/reflectr?user=reflectr&password=r3fl3ctr', 
               :device_type => pgserver)
-Device.create(:name => 'Reflectr JMX', :ip => '127.0.0.1',
-              :url => 'org.hornetq:module=Core,type=Server',
-              :device_type => hornetq)
+reflectr_queues = Device.create(:name => 'Reflectr HornetQ Server', :ip => '127.0.0.1',
+              :url => 'org.hornetq:module=Core,type=Queue,name=*,address=*',
+              :device_type => dt_hornetq)
               
+Metric.delete_all
+Metric.create(:name => 'Messages Added', :port => 1090, :pollgroup => hornetq, :metric_type => metric_jmx, :data_type => counter, :property => 'MessagesAdded')
+Metric.create(:name => 'Message Count', :port => 1090, :pollgroup => hornetq, :metric_type => metric_jmx, :data_type => gauge, :property => 'MessageCount')
 
-              
 
 

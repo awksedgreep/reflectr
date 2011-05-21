@@ -1,21 +1,21 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-activemq:
+dt_activemq:
   name: ActiveMQ Server
 
 
-hornetq:
+dt_hornetq:
   name: HornetQ Server
 
 
-mysql:
+dt_mysql:
   name: MySQL Server
 
 
-sqlserver:
+dt_sqlserver:
   name: SQL Server
 
-pg:
+dt_pg:
   name: PostgreSQL Server
 
 

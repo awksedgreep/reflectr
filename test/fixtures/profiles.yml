@@ -1,9 +1,24 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  device_type_id: 1
-  pollgroup_id: 1
+# profile_hornetq = Profile.create(:device_type => dt_hornetq, :pollgroup => hornetq)
+# profile_pgdb =    Profile.create(:device_type => pgserver, :pollgroup => pgdb)
+# profile_pgtable = Profile.create(:device_type => pgserver, :pollgroup => pgtable)
+# profile_pgindex = Profile.create(:device_type => pgserver, :pollgroup => pgindex)
 
-two:
-  device_type_id: 1
-  pollgroup_id: 1
+profile_hornetq:
+  device_type: dt_hornetq
+  pollgroup: hornetq
+
+
+profile_pgdb:
+  device_type: dt_pg
+  pollgroup: pgdb
+
+
+profile_pgtable:
+  device_type: dt_pg
+  pollgroup: pgtable
+
+profile_pgindex:
+  device_type: dt_pg
+  pollgroup: pgindex

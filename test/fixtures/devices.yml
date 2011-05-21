@@ -4,10 +4,10 @@ reflectrdb:
   name: Reflectr DB
   ip: 127.0.0.1
   url: jdbc:postgresql://127.0.0.1/reflectr?user=reflectr&password=r3fl3ctr
-  device_type: pg
+  device_type: dt_pg
 
 reflectrhornetq:
-  name: Reflectr Hornet Qs
+  name: Reflectr HornetQ Server
   ip: 127.0.0.1
-  url: module=Core,name=*,type=Queue
-  device_type_id: 1
+  url: org.hornetq:module=Core,type=Queue,name=*,address=*
+  device_type: dt_hornetq
