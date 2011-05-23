@@ -12,6 +12,24 @@ class DeviceTest < ActiveSupport::TestCase
     assert_not_nil hornetq_dt
   end
   
+  test "device -> stats relationship" do
+    assert hornetq = Device.where(:name => 'Reflectr HornetQ Server').first
+    assert_kind_of Device, hornetq
+    assert_not_nil hornetq
+    assert hornetq_stats = hornetq.stats
+    assert_kind_of Array, hornetq_stats
+    assert_nil hornetq_stats.first
+  end
+  
+  test "device -> current_stats relationship" do
+    assert hornetq = Device.where(:name => 'Reflectr HornetQ Server').first
+    assert_kind_of Device, hornetq
+    assert_not_nil hornetq
+    assert hornetq_current_stats = hornetq.current_stats
+    assert_kind_of Array, hornetq_current_stats
+    assert_nil hornetq_current_stats.first
+  end
+  
   test "device crud" do
     assert dt = DeviceType.where(:name => 'HornetQ Server').first
     assert boogie = Device.create(:name => 'Boogie', :device_type => dt)

@@ -4,26 +4,25 @@ class Stat < ActiveRecord::Base
   
   def Stat.process(stuff)
     begin
-      current = CurrentStat.find(:all, :conditions => {:device => stuff[:device], :metric => stuff[:metric]}).first
+      current = CurrentStat.where(:device_id => stuff[:device], :metric_id => stuff[:metric]).first
       # rearrange stuff for strings
-      datatype = stuff[:metric].datatype.name
-      if datatype == 'Text'
+      data_type = stuff[:metric].data_type.name
+      if data_type == 'Text'
         stuff[:string_value] = stuff[:value].to_s
         stuff[:value] = nil
       end
       # If no current stat, then update current and return . . . no need to waste cycles
       if current.nil?
-        CurrentStat.new(stuff)  
-        return repository(:default).adapter.execute(sql)
+        CurrentStat.create(stuff)
+        Stat.create(stuff) if (data_type == 'Text' or data_type == 'Gauge')  # go ahead an add an entry, but only if its text or gauge  
+        return true
       end
 
-      case stuff[:metric].datatype.name
+      case data_type
         when 'Text'
           # Only create row if string has changed :)
           if (stuff[:string_value] != current.string_value)
-            Stat.new(stuff).save
-            current.string_value = stuff[:value].to_s
-            current.save
+            Stat.create(stuff)
           end
         when 'Gauge'
            # No reason to add row if data is unchanged
@@ -35,7 +34,7 @@ class Stat < ActiveRecord::Base
         when 'Timeticks'
            # store as int, would check for dups but would likely just waste cpu cycles
            stuff[:value] = stuff[:value].to_milliseconds
-           Stat.new(stuff).save
+           Stat.create(stuff)
            current.value = stuff[:value].to_i
            current.save
         when 'Counter'
@@ -49,7 +48,7 @@ class Stat < ActiveRecord::Base
             current.save
             # replace new value with delta before storing stat
             stuff[:value] = delta
-            Stat.new(stuff).save
+            Stat.create(stuff)
           elsif (stuff[:value].to_i < current.value.to_i)
             current.value = stuff[:value].to_i
           end
@@ -59,5 +58,18 @@ class Stat < ActiveRecord::Base
         puts e.message  
         puts e.backtrace.join("\n")
      end
+  end
+  
+  def Stat.create_or_update_stat(stuff)
+    statement = %{
+      INSERT INTO stats(metric_id, device_id, string_value, value, created_at, updated_at)
+      VALUES (#{connection.quote(name)}, utc_timestamp, utc_timestamp, 1)
+      ON DUPLICATE KEY UPDATE
+        updated_at = utc_timestamp,
+        post_tags_count = post_tags_count + 1,
+        id=LAST_INSERT_ID(id)
+    }.squish!
+    
+    connection.insert_sql(statement)
   end
 end
