@@ -3,7 +3,7 @@ require 'test_helper'
 class MetricTypeTest < ActiveSupport::TestCase
   fixtures :all
   
-  test "matric_type -> metric relationship" do
+  test "metric_type -> metric relationship" do
     assert jmx = MetricType.where(:name => 'JMX').first
     assert_kind_of MetricType, jmx
     assert_not_nil jmx

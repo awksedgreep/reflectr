@@ -50,5 +50,6 @@ Metric.delete_all
 Metric.create(:name => 'Messages Added', :port => 1090, :pollgroup => hornetq, :metric_type => metric_jmx, :data_type => counter, :property => 'MessagesAdded')
 Metric.create(:name => 'Message Count', :port => 1090, :pollgroup => hornetq, :metric_type => metric_jmx, :data_type => gauge, :property => 'MessageCount')
 
-
+Stat.delete_all
+CurrentStat.delete_all
 

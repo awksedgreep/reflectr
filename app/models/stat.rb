@@ -14,7 +14,8 @@ class Stat < ActiveRecord::Base
       # If no current stat, then update current and return . . . no need to waste cycles
       if current.nil?
         CurrentStat.create(stuff)
-        Stat.create(stuff) if (data_type == 'Text' or data_type == 'Gauge')  # go ahead an add an entry, but only if its text or gauge  
+        stuff[:value] = stuff[:value].to_milliseconds if data_type == 'Timeticks'
+        Stat.create(stuff) if (data_type != 'Counter')  # go ahead an add an entry, but not if it's counter  
         return true
       end
 
@@ -32,7 +33,7 @@ class Stat < ActiveRecord::Base
               current.save
            end
         when 'Timeticks'
-           # store as int, would check for dups but would likely just waste cpu cycles
+           # store as int, would check for dups but would likely just waste cpu cycles :)
            stuff[:value] = stuff[:value].to_milliseconds
            Stat.create(stuff)
            current.value = stuff[:value].to_i
@@ -51,25 +52,10 @@ class Stat < ActiveRecord::Base
             Stat.create(stuff)
           elsif (stuff[:value].to_i < current.value.to_i)
             current.value = stuff[:value].to_i
+            current.save
           end
         end
      rescue Exception => e
-        # Todo, figure out DM logging and use it here  
-        puts e.message  
-        puts e.backtrace.join("\n")
      end
-  end
-  
-  def Stat.create_or_update_stat(stuff)
-    statement = %{
-      INSERT INTO stats(metric_id, device_id, string_value, value, created_at, updated_at)
-      VALUES (#{connection.quote(name)}, utc_timestamp, utc_timestamp, 1)
-      ON DUPLICATE KEY UPDATE
-        updated_at = utc_timestamp,
-        post_tags_count = post_tags_count + 1,
-        id=LAST_INSERT_ID(id)
-    }.squish!
-    
-    connection.insert_sql(statement)
   end
 end
