@@ -1,0 +1,21 @@
+web:
+  context: /reflectr
+  static: public
+  env: development
+
+tasks:
+  jmx_producer:
+
+jobs:
+  jmx_producer:
+    job: JmxProducer
+    cron: '*/15 * * * * ?'
+
+queues:
+  /queues/jmx_query:
+    durable: true
+
+messaging:
+  /queues/jmx_query:
+    JmxConsumer:
+      concurrency: 30

@@ -22,5 +22,8 @@ Reflectr::Application.configure do
 
   # Only use best-standards-support built into browsers
   config.action_dispatch.best_standards_support = :builtin
+  
+  # Use torquebox logger
+  config.logger = TorqueBox::Logger.new
 end
 

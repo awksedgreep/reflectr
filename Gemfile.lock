@@ -40,7 +40,7 @@ GEM
       abstract (>= 1.0.0)
     i18n (0.5.0)
     jdbc-postgres (9.0.801)
-    jmx (0.7)
+    jmx4r (0.1.3)
     jruby-openssl (0.7.4)
       bouncy-castle-java
     mail (2.2.19)
@@ -97,8 +97,9 @@ DEPENDENCIES
   activerecord-jdbc-adapter
   activerecord-jdbcpostgresql-adapter
   jdbc-postgres
-  jmx
+  jmx4r
   jruby-openssl
   rails (= 3.0.7)
   torquebox
+  torquebox-messaging
   torquebox-rake-support

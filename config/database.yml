@@ -12,7 +12,7 @@ development:
   adapter: jdbcpostgresql
   encoding: unicode
   database: reflectr_development
-  pool: 5
+  pool: 20
   username: reflectr
   password: r3fl3ctr
 
@@ -38,7 +38,7 @@ test:
   adapter: jdbcpostgresql
   encoding: unicode
   database: reflectr_test
-  pool: 5
+  pool: 20
   username: reflectr
   password: r3fl3ctr
 
@@ -46,6 +46,6 @@ production:
   adapter: jdbcpostgresql
   encoding: unicode
   database: reflectr
-  pool: 5
+  pool: 20
   username: reflectr
   password: r3fl3ctr
